@@ -1,0 +1,16 @@
+@model Zombie.Models.GameData
+ 
+<h2>Добавление сохранения</h2>
+<form asp-action="create" asp-controller="Home">
+    <p>
+        <label asp-for="Kills">Kills</label><br />
+        <input type="number" asp-for="Kills" />
+    </p>
+    <p>
+        <label asp-for="Health">Health</label><br />
+        <input type="number" asp-for="Health" />
+    </p>
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+</form>

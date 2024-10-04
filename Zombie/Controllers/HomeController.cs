@@ -1,31 +1,33 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Zombie.Context;
 using Zombie.Models;
 
 namespace Zombie.Controllers;
 
+
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    ZombieContext db;
+    
+    public HomeController(ZombieContext context)
     {
-        _logger = logger;
+        db = context;
     }
-
-    public IActionResult Index()
+ 
+    public async Task<IActionResult> Index()
+    {
+        return View(await db.GameDatas.ToListAsync());
+    }
+    public IActionResult Create()
     {
         return View();
     }
-
-    public IActionResult Privacy()
+    [HttpPost]
+    public async Task<IActionResult> Create(GameData data)
     {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        db.GameDatas.Add(data);
+        await db.SaveChangesAsync();
+        return RedirectToAction("Index");
     }
 }
