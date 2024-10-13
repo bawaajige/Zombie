@@ -17,8 +17,8 @@ namespace Zombie.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Kills = table.Column<int>(type: "integer", nullable: false),
-                    Health = table.Column<int>(type: "integer", nullable: false)
+                    killCount = table.Column<int>(type: "integer", nullable: false),
+                    playerHealth = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

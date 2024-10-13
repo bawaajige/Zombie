@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Zombie.Context;
 
@@ -6,13 +7,13 @@ using Zombie.Context;
 var builder = WebApplication.CreateBuilder(args);
  
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
- 
 builder.Services.AddDbContext<ZombieContext>(options => options.UseNpgsql(connection));
  
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
  
 var app = builder.Build();
 
-app.MapDefaultControllerRoute();
-
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Save}/{action=AddDataFromJson}/{id?}");
 app.Run();

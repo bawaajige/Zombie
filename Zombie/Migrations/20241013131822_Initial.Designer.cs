@@ -11,7 +11,7 @@ using Zombie.Context;
 namespace Zombie.Migrations
 {
     [DbContext(typeof(ZombieContext))]
-    [Migration("20241004125035_Initial")]
+    [Migration("20241013131822_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -32,11 +32,11 @@ namespace Zombie.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Health")
+                    b.Property<int>("killCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Kills")
-                        .HasColumnType("integer");
+                    b.Property<float>("playerHealth")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

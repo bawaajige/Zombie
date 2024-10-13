@@ -29,11 +29,11 @@ namespace Zombie.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Health")
+                    b.Property<int>("killCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Kills")
-                        .HasColumnType("integer");
+                    b.Property<float>("playerHealth")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
