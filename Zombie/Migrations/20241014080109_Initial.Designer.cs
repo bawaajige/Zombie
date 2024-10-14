@@ -11,7 +11,7 @@ using Zombie.Context;
 namespace Zombie.Migrations
 {
     [DbContext(typeof(ZombieContext))]
-    [Migration("20241013131822_Initial")]
+    [Migration("20241014080109_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

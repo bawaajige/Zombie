@@ -16,9 +16,17 @@ namespace Zombie.Controllers
         {
             db = context;
         }
-
+        
+        [HttpGet]
+        public IActionResult GetData()
+        {
+            var datas = db.GameDatas.OrderByDescending(d => d.Id).FirstOrDefault();
+            return Ok(JsonConvert.SerializeObject(datas));
+        }
+        
+        
         [HttpPost]
-        public async Task<IActionResult> AddDataFromJson()
+        public async Task<IActionResult> AddData()
         {
             try
             {

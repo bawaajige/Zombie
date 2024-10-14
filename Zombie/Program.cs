@@ -13,7 +13,7 @@ builder.Services.AddControllers();
  
 var app = builder.Build();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Save}/{action=AddDataFromJson}/{id?}");
+
+
+app.MapControllers();
 app.Run();
