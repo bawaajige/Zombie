@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Zombie.Models;
 using Zombie.Context;
@@ -17,29 +18,27 @@ namespace Zombie.Controllers
             db = context;
         }
         
+        
+        
         [HttpGet]
-        public IActionResult GetData()
-        {
-            var datas = db.GameDatas.OrderByDescending(d => d.Id).FirstOrDefault();
-            return Ok(JsonConvert.SerializeObject(datas));
-        }
+        public Task<GameData?> GetData() =>
+            db.GameDatas.OrderByDescending(p => p).FirstOrDefaultAsync();
         
-        
+
         [HttpPost]
         public async Task<IActionResult> AddData()
         {
             try
             {
-                using (StreamReader reader = new StreamReader(Request.Body))
-                {
-                    string json = await reader.ReadToEndAsync();
-                    var data = JsonConvert.DeserializeObject<GameData>(json);
-    
-                    db.GameDatas.Add(data);
-                    await db.SaveChangesAsync();
-    
-                    return Ok("Data added successfully");
-                }
+                using StreamReader reader = new StreamReader(Request.Body);
+
+                string json = await reader.ReadToEndAsync();
+                var data = JsonConvert.DeserializeObject<GameData>(json);
+
+                db.GameDatas.Add(data);
+                await db.SaveChangesAsync();
+
+                return Ok("Data added successfully");
             }
             catch (Exception ex)
             {
