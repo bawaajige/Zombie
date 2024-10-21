@@ -1,11 +1,10 @@
+
 namespace Zombie.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Models;
 using Context;
-
+using Provider;
 
 
 [ApiController]
@@ -13,34 +12,37 @@ using Context;
 public class SaveController : Controller
 {
     private ZombieContext db;
-    
-    public SaveController(ZombieContext context)
+    private ISaveProvider saveProvider;
+
+    public SaveController(ZombieContext context, ISaveProvider provider)
     {
         db = context;
+        saveProvider = provider;
     }
-    
+
     /// <summary>
     /// Обработка Get Request, фильтрация Id и поиск последней записи в бд
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns>Объект модели GameData</returns>
     [HttpGet("GetData/{playerId}")]
-    public Task<GameData?> GetData(int playerId) =>
-        db.GameDatas.Where(p => p.PlayerId == playerId).OrderByDescending(p => p.Id).FirstOrDefaultAsync();
-    
+    public async Task<GameData> GetData(int playerId)
+    {
+        GameData? data = await saveProvider.GetData(playerId);
+        return data;
+    }
+
     /// <summary>
     /// Записывает данные в бд
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
     [HttpPost("AddData")]
-    public async Task<IActionResult> AddData([FromBody] GameData data)
+    public async Task<IActionResult> AddData(GameData data)
     {
         try
         {
-            db.GameDatas.Add(data);
-            await db.SaveChangesAsync();
-
+            saveProvider.AddData(data);
             return Ok("Data added successfully");
         }
         catch (Exception ex)

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Zombie.Context;
+using Zombie.Provider;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ string? connection = builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddDbContext<ZombieContext>(options => options.UseNpgsql(connection));
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ISaveProvider, SaveProvider>();
 
 var app = builder.Build();
 
