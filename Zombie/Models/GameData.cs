@@ -21,4 +21,9 @@ public class GameData
     /// Id игрока
     /// </summary>
     public int PlayerId { get; init; }
+    
+    /// <summary>
+    /// Время сохранения
+    /// </summary>
+    public int SaveTime { get; init; }
 }
