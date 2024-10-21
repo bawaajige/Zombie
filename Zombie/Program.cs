@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Zombie.Context;
-
 
 
 var builder = WebApplication.CreateBuilder(args);

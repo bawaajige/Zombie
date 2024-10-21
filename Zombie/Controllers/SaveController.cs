@@ -1,49 +1,51 @@
+namespace Zombie.Controllers;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Zombie.Models;
-using Zombie.Context;
+using Models;
+using Context;
 
 
-namespace Zombie.Controllers
+
+[ApiController]
+[Route("Save")]
+public class SaveController : Controller
 {
-    [ApiController]
-    [Route("[controller]/[action]")]
-    public class SaveController : Controller
+    private ZombieContext db;
+    
+    public SaveController(ZombieContext context)
     {
-        private ZombieContext db;
-
-        public SaveController(ZombieContext context)
+        db = context;
+    }
+    
+    /// <summary>
+    /// Обработка Get Request, фильтрация Id и поиск последней записи в бд
+    /// </summary>
+    /// <param name="playerId"></param>
+    /// <returns>Объект модели GameData</returns>
+    [HttpGet("GetData/{playerId}")]
+    public Task<GameData?> GetData(int playerId) =>
+        db.GameDatas.Where(p => p.PlayerId == playerId).OrderByDescending(p => p.Id).FirstOrDefaultAsync();
+    
+    /// <summary>
+    /// Записывает данные в бд
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    [HttpPost("AddData")]
+    public async Task<IActionResult> AddData([FromBody] GameData data)
+    {
+        try
         {
-            db = context;
+            db.GameDatas.Add(data);
+            await db.SaveChangesAsync();
+
+            return Ok("Data added successfully");
         }
-        
-        
-        
-        [HttpGet]
-        public Task<GameData?> GetData() =>
-            db.GameDatas.OrderByDescending(p => p).FirstOrDefaultAsync();
-        
-
-        [HttpPost]
-        public async Task<IActionResult> AddData()
+        catch (Exception ex)
         {
-            try
-            {
-                using StreamReader reader = new StreamReader(Request.Body);
-
-                string json = await reader.ReadToEndAsync();
-                var data = JsonConvert.DeserializeObject<GameData>(json);
-
-                db.GameDatas.Add(data);
-                await db.SaveChangesAsync();
-
-                return Ok("Data added successfully");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
-            }
+            return BadRequest($"An error occurred: {ex.Message}");
         }
     }
 }

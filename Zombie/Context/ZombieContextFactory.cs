@@ -1,8 +1,11 @@
+namespace Zombie.Context;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Zombie.Context;
-
+/// <summary>
+/// Migration helper
+/// </summary>
 public class ZombieContextFactory :  IDesignTimeDbContextFactory<ZombieContext>
 {
     

@@ -2,8 +2,23 @@ namespace Zombie.Models;
 
 public class GameData
 {
-    public int Id { get; set; }
-    public int KillCount { get; set; }
-    public float PlayerHealth { get; set; }
-    //public float PlayerId { get; set; }
+    /// <summary>
+    /// Id
+    /// </summary>
+    public int Id { get; init; }
+
+    /// <summary>
+    /// Количество убийств
+    /// </summary>
+    public int KillCount { get; init; }
+
+    /// <summary>
+    /// Количество здоровья
+    /// </summary>
+    public float PlayerHealth { get; init; }
+    
+    /// <summary>
+    /// Id игрока
+    /// </summary>
+    public int PlayerId { get; init; }
 }

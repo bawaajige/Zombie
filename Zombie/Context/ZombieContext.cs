@@ -1,11 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using Zombie.Models;
-
 namespace Zombie.Context;
+
+using Microsoft.EntityFrameworkCore;
+using Models;
+
+
 
 public class ZombieContext : DbContext
 {
+    /// <summary>
+    /// Список сохранений
+    /// </summary>
     public DbSet<GameData> GameDatas { get; set; } = null!;
 
+    /// <summary>
+    /// Устанавливаем праметры подключения к базе данных
+    /// </summary>
+    /// <param name="options"></param>
     public ZombieContext(DbContextOptions<ZombieContext> options) : base(options) {}
 }
