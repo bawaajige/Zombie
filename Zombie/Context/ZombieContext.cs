@@ -16,5 +16,5 @@ public class ZombieContext : DbContext
     /// Устанавливаем праметры подключения к базе данных
     /// </summary>
     /// <param name="options"></param>
-    public ZombieContext(DbContextOptions<ZombieContext> options) : base(options) {}
+    public ZombieContext(DbContextOptions options) : base(options) {}
 }

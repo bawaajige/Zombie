@@ -5,7 +5,7 @@
 namespace Zombie.Migrations
 {
     /// <inheritdoc />
-    public partial class PlayerIdAddToModel : Migration
+    public partial class PlayerIdAdd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

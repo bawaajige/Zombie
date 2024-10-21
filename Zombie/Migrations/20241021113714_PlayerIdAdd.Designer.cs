@@ -11,8 +11,8 @@ using Zombie.Context;
 namespace Zombie.Migrations
 {
     [DbContext(typeof(ZombieContext))]
-    [Migration("20241016140759_PlayerIdAddToModel")]
-    partial class PlayerIdAddToModel
+    [Migration("20241021113714_PlayerIdAdd")]
+    partial class PlayerIdAdd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
