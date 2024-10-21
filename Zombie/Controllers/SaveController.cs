@@ -19,14 +19,14 @@ public class SaveController : Controller
         db = context;
     }
     
-    /*/// <summary>
+    /// <summary>
     /// Обработка Get Request, фильтрация Id и поиск последней записи в бд
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns>Объект модели GameData</returns>
     [HttpGet("GetData/{playerId}")]
     public Task<GameData?> GetData(int playerId) =>
-        db.GameDatas.Where(p => p.PlayerId == playerId).OrderByDescending(p => p.Id).FirstOrDefaultAsync();*/
+        db.GameDatas.Where(p => p.PlayerId == playerId).OrderByDescending(p => p.Id).FirstOrDefaultAsync();
     
     /// <summary>
     /// Записывает данные в бд

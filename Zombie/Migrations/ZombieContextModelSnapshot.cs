@@ -38,9 +38,6 @@ namespace Zombie.Migrations
                     b.Property<int>("PlayerId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SaveTime")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.ToTable("GameDatas");
