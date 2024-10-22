@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace Zombie.Context;
 
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +14,7 @@ public class ZombieContext : DbContext
     /// Список сохранений
     /// </summary>
     public DbSet<GameData> GameDatas { get; set; } = null!;
-
+    
     /// <summary>
     /// Устанавливаем праметры подключения к базе данных
     /// </summary>

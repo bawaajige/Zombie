@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Zombie.Common;
 using Zombie.Context;
 using Zombie.Provider;
 
@@ -11,6 +14,23 @@ builder.Services.AddDbContext<ZombieContext>(options => options.UseNpgsql(connec
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<ISaveProvider, SaveProvider>();
+builder.Services.AddScoped<IAuthProvider, AuthProvider>();
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = AuthOptions.Issuer,
+            // ValidateAudience = true,
+            // ValidAudience = "AuthOptions.Audience",
+            ValidateLifetime = true,
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            ValidateIssuerSigningKey = true,
+        };
+    });
 
 var app = builder.Build();
 
@@ -19,5 +39,7 @@ var context = scope.ServiceProvider.GetRequiredService<ZombieContext>();
 context.Database.Migrate();
 
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();

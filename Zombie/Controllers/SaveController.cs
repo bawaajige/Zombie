@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace Zombie.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,7 @@ public class SaveController : Controller
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns>Объект модели GameData</returns>
+    [Authorize]
     [HttpGet("GetData/{playerId}")]
     public async Task<GameData> GetData(int playerId)
     {
@@ -37,6 +40,7 @@ public class SaveController : Controller
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
+    [Authorize]
     [HttpPost("AddData")]
     public async Task<IActionResult> AddData(GameData data)
     {
