@@ -23,7 +23,7 @@ public class SaveController : Controller
     }
 
     /// <summary>
-    /// Обработка Get Request, фильтрация Id и поиск последней записи в бд
+    /// Обработка Get Request, фильтрация Id и поиск последней записи в бд, только для авторизованных
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns>Объект модели GameData</returns>
@@ -36,7 +36,7 @@ public class SaveController : Controller
     }
 
     /// <summary>
-    /// Записывает данные в бд
+    /// Записывает данные в бд, только для авторизованных
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>

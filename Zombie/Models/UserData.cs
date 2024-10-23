@@ -1,13 +1,23 @@
-/*namespace Zombie.Models;
-
 using Microsoft.AspNetCore.Identity;
 
+namespace Zombie.Models;
 
 
-public class UserData : IdentityUser<long>
+
+public class UserData 
 {
+    /// <summary>
+    /// id
+    /// </summary>
     public int Id { get; set; }
-    public string UserName { get; set; }
-    public string RefreshToken { get; set; }
-    public DateTime RefreshTokenExpiryTime { get; set; }
-}*/
+    
+    /// <summary>
+    /// username пользователя
+    /// </summary>
+    public string Username { get; set; }
+    
+    /// <summary>
+    /// пароль пользователя
+    /// </summary>
+    public string Password { get; set; }
+}

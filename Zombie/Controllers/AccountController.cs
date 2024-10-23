@@ -12,6 +12,12 @@ public class AuthController : ControllerBase
     {
         authProvider = provider;
     }
+    
+    /// <summary>
+    /// возвращает JWT токен
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
     [HttpGet("login/{username}")]
     public async Task<IActionResult> Login(string username)
     {

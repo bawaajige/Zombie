@@ -2,7 +2,9 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Zombie.Common;
-
+/// <summary>
+/// конфигурация auth
+/// </summary>
 public class AuthOptions
 {
     public const string ISSUER = "ZombieServer";

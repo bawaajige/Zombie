@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Zombie.Provider;
 
 using System.IdentityModel.Tokens.Jwt;
@@ -10,6 +8,7 @@ using Common;
 
 public class AuthProvider : IAuthProvider
 {
+    /// <inheritdoc />
     public IActionResult Login(string username)
     {
         var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
