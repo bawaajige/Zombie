@@ -22,10 +22,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidIssuer = AuthOptions.Issuer,
-            // ValidateAudience = true,
-            // ValidAudience = "AuthOptions.Audience",
+            ValidateIssuer = false,
+            ValidIssuer = AuthOptions.ISSUER,
+            ValidateAudience = false,
+            ValidAudience = AuthOptions.AUDIENCE,
             ValidateLifetime = true,
             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
             ValidateIssuerSigningKey = true,
@@ -33,7 +33,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
-
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ZombieContext>();
 context.Database.Migrate();
