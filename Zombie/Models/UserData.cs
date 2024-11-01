@@ -12,7 +12,7 @@ public class UserData
     public int Id { get; set; }
     
     /// <summary>
-    /// username пользователя
+    /// имя пользователя
     /// </summary>
     public string Username { get; set; }
     

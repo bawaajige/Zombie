@@ -1,13 +1,10 @@
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Zombie.Context;
+using Zombie.Models;
+using Zombie.Provider;
 
 namespace Zombie.Controllers;
-
-using Microsoft.AspNetCore.Mvc;
-using Models;
-using Context;
-using Provider;
-
 
 [ApiController]
 [Route("Save")]
@@ -27,7 +24,7 @@ public class SaveController : Controller
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns>Объект модели GameData</returns>
-    [Authorize]
+    //[Authorize]
     [HttpGet("GetData/{playerId}")]
     public async Task<GameData> GetData(int playerId)
     {

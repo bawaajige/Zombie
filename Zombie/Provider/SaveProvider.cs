@@ -1,11 +1,9 @@
-namespace Zombie.Provider;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Context;
-using Models;
+using Zombie.Context;
+using Zombie.Models;
 
-
+namespace Zombie.Provider;
 
 public class SaveProvider : ISaveProvider
 {

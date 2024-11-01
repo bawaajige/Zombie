@@ -1,7 +1,8 @@
-namespace Zombie.Controllers;
-
 using Microsoft.AspNetCore.Mvc;
-using Provider;
+using Zombie.Models;
+using Zombie.Provider;
+
+namespace Zombie.Controllers;
 
 [ApiController]
 [Route("account")]
@@ -18,9 +19,9 @@ public class AuthController : ControllerBase
     /// </summary>
     /// <param name="username"></param>
     /// <returns></returns>
-    [HttpGet("login/{username}")]
-    public async Task<IActionResult> Login(string username)
+    [HttpPost("login/")]
+    public async Task<IActionResult> LoginAsync(UserData userData)
     {
-        return Ok(authProvider.Login(username));
+        return Ok(authProvider.LoginAsync(userData));
     }
 }
