@@ -24,7 +24,7 @@ public class SaveController : Controller
     /// </summary>
     /// <param name="playerId"></param>
     /// <returns>Объект модели GameData</returns>
-    //[Authorize]
+    [Authorize]
     [HttpGet("GetData/{playerId}")]
     public async Task<GameData> GetData(int playerId)
     {
@@ -43,7 +43,7 @@ public class SaveController : Controller
     {
         try
         {
-            saveProvider.AddData(data);
+            await saveProvider.AddData(data);
             return Ok("Data added successfully");
         }
         catch (Exception ex)

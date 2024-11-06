@@ -13,15 +13,26 @@ public class AuthController : ControllerBase
     {
         authProvider = provider;
     }
-    
+
     /// <summary>
-    /// возвращает JWT токен
     /// </summary>
-    /// <param name="username"></param>
-    /// <returns></returns>
-    [HttpPost("login/")]
+    /// <param name="userData"></param>
+    /// <returns>jwt токен</returns>
+    [HttpGet("login")]
     public async Task<IActionResult> LoginAsync(UserData userData)
     {
-        return Ok(authProvider.LoginAsync(userData));
+        var login = await authProvider.Login(userData);
+        return Ok(login);
+    }
+    
+    /// <summary>
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns>JWT токен</returns>
+    [HttpPost("register/")]
+    public async Task<IActionResult> RegisterAsync(UserData userData)
+    {
+        var register = await authProvider.RegisterAsync(userData);
+        return Ok(register);
     }
 }
