@@ -32,7 +32,7 @@ public class AuthController : ControllerBase
     [HttpPost("register/")]
     public async Task<IActionResult> RegisterAsync(UserData userData)
     {
-        var register = await authProvider.RegisterAsync(userData);
+        var register = await authProvider.Register(userData);
         return Ok(register);
     }
 }

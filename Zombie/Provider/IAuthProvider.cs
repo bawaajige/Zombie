@@ -11,7 +11,7 @@ public interface IAuthProvider
     /// <param name="userData"></param>
     /// <param name="username"></param>
     /// <returns>JWT токен</returns>
-    Task<string> RegisterAsync(UserData userData);
+    Task<string> Register(UserData userData);
     
     /// <summary>
     /// принимает данные и сверяет с базой данных

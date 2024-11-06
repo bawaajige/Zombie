@@ -20,7 +20,7 @@ public class AuthProvider : IAuthProvider
     }
 
     /// <inheritdoc />
-    public Task<string> RegisterAsync(UserData userData)
+    public Task<string> Register(UserData userData)
     {
         if (string.IsNullOrWhiteSpace(userData.Username)) 
         {
